@@ -1,0 +1,28 @@
+CREATE DATABASE librarymanagementsystem;
+USE librarymanagementsystem;
+
+CREATE TABLE LibraryInventory (
+    BookId INT PRIMARY KEY,
+    BookName VARCHAR(100) NOT NULL,
+    Author VARCHAR(100) NOT NULL,
+    Publisher VARCHAR(100),
+    Genre VARCHAR(50),
+    Availability CHAR(1) NOT NULL CHECK (Availability IN ('A','B'))
+);
+
+CREATE TABLE BorrowedRegister (
+    StudentId INT NOT NULL,
+    StudentName VARCHAR(100) NOT NULL,
+    Class INT NOT NULL CHECK (Class BETWEEN 1 AND 12),
+    BookId INT NOT NULL,
+    IssueDate DATE NOT NULL,
+    Returned VARCHAR(3) NOT NULL CHECK (Returned IN ('Yes','No')),
+    ReturnDate DATE NULL,
+
+    PRIMARY KEY (StudentId, BookId, IssueDate),
+
+    FOREIGN KEY (BookId)
+        REFERENCES LibraryInventory(BookId)
+        ON UPDATE CASCADE
+        ON DELETE RESTRICT
+);
