@@ -3,7 +3,7 @@ import datetime
 from datetime import date
 con = mysql.connector.connect(host = "localhost",
                               username = "root",
-                              password = "university",
+                              password = "YOUR_MYSQL_PASSWORD",
                               database = "librarymanagementsystem")
 cursor = con.cursor()
 
